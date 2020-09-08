@@ -7,7 +7,7 @@ from .models import Meal
 
 
 def index(request):
-    meals = Meal.objects.order_by("name")
+    meals = Meal.objects.all()
     context = {
         "meals": meals,
     }
@@ -25,7 +25,7 @@ def detail(request, meal_id):
 
 
 def plan(request):
-    meals = Meal.objects.order_by("name")
+    meals = Meal.objects.all()
 
     plan = sample([m for m in meals], 7)
     context = {
