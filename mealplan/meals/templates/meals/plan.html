@@ -1,0 +1,11 @@
+{% if plan %}
+<ul>
+    {% for meal in plan %}
+    <li>
+        <a href="{% url 'meals:detail' meal.id %}">{{meal.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No meals yet!</p>
+{% endif %}

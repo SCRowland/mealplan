@@ -1,0 +1,11 @@
+{% if meals %}
+<ul>
+    {% for meal in meals %}
+    <li>
+        <a href="{% url 'meals:detail' meal.id %}">{{meal.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No meals yet!</p>
+{% endif %}
