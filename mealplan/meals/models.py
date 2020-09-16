@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Meal(models.Model):
@@ -28,3 +29,6 @@ class Meal(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+    def get_absolute_url(self):
+        return reverse("meals:detail", kwargs={"pk": self.pk})

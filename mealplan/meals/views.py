@@ -1,35 +1,27 @@
 from random import sample
 
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.views import generic
 
 from .models import Meal
 
 
-def index(request):
-    meals = Meal.objects.all()
-    context = {
-        "meals": meals,
-    }
-
-    return render(request, "meals/index.html", context=context)
+class IndexView(generic.ListView):
+    model = Meal
+    context_object_name = "meals"
 
 
-def detail(request, meal_id):
-    meal = get_object_or_404(Meal, pk=meal_id)
-    context = {
-        "meal": meal,
-    }
-
-    return render(request, "meals/detail.html", context)
+class DetailView(generic.UpdateView):
+    model = Meal
+    fields = ["name"]
 
 
-def plan(request):
-    meals = Meal.objects.all()
+class PlanView(generic.ListView):
+    model = Meal
+    context_object_name = "plan"
+    template_name = "meals/plan_list.html"
 
-    plan = sample([m for m in meals], 7)
-    context = {
-        "plan": plan,
-    }
-
-    return render(request, "meals/plan.html", context=context)
+    def get_queryset(self):
+        meals = Meal.objects.all()
+        return sample([m for m in meals], 7)
