@@ -12,9 +12,16 @@ class IndexView(generic.ListView):
     context_object_name = "meals"
 
 
+class CreateView(generic.CreateView):
+    model = Meal
+    fields = ["name", "difficulty", "healthiness"]
+    template_name_suffix = "_create_form"
+
+
 class DetailView(generic.UpdateView):
     model = Meal
-    fields = ["name"]
+    fields = ["name", "difficulty", "healthiness"]
+    template_name_suffix = "_update_form"
 
 
 class PlanView(generic.ListView):

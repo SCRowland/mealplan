@@ -1,0 +1,19 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Rowsoon Meal Planner</title>
+    <meta name="description" content="Rowsoon Meal Planner">
+    <meta name="author" content="Simon Rowland">
+
+</head>
+
+<body>
+    <p><a href="{% url 'meals:index' %}">Meals</a> | <a href="{% url 'meals:plan' %}">Meal Plan</a></p>
+    {% block content %}{% endblock %}
+</body>
+
+</html>

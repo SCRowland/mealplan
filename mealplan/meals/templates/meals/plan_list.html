@@ -1,4 +1,7 @@
+{% extends 'meals/base.html' %}
+{% block content %}
 {% if plan %}
+<h1>Meal Plan</h1>
 <ul>
     {% for meal in plan %}
     <li>
@@ -9,3 +12,4 @@
 {% else %}
 <p>No meals yet!</p>
 {% endif %}
+{% endblock %}
