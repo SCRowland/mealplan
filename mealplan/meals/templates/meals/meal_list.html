@@ -1,19 +1,25 @@
 {% extends 'meals/base.html' %}
-{% block content %}
-{% if meals %}
-<h1>Meals</h1>
-<ul>
-    {% for meal in meals %}
-    <li>
-        <a href="{% url 'meals:detail' meal.id %}">{{meal.name}} (D: {{meal.difficulty}}, H: {{meal.healthiness}})</a>
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No meals yet!</p>
-{% endif %}
+{% block title %}
+Meals
+{% endblock %}
 
-<p>
-    <a href="{% url 'meals:create' %}">Add New Meal</a>
-</p>
+{% block content %}
+<table class="table">
+    <tbody>
+        {% if meals %}
+        {% for meal in meals %}
+        <tr>
+            <td><a href="{% url 'meals:detail' meal.id %}">{{meal.name}}</a></td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td>No meals yet!</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td><a href="{% url 'meals:create' %}">Add New Meal</a></td>
+        </tr>
+    </tbody>
+</table>
 {% endblock %}

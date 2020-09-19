@@ -1,13 +1,20 @@
 {% extends 'meals/base.html' %}
-{% block content %}
 
-<h1>Add New Meal</h1>
+{% load bootstrap4 %}
+
+{% block title %}
+Add New Meal
+{% endblock %}
+
+{% block content %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form method="post">
+<form method="post" class="form">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create">
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">Create</button>
+    {% endbuttons %}
 </form>
 {% endblock %}
