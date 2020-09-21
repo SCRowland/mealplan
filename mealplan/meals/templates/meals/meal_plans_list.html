@@ -1,0 +1,35 @@
+{% extends 'meals/base.html' %}
+{% block title %}
+Meal Plans
+{% endblock %}
+
+{% block content %}
+{% if mealplans %}
+{% for plan in mealplans %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ plan.start_date }}</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for meal in plan.meals.all %}
+        <tr>
+            <td>{% cycle plan.days %}</td>
+            <td>{{ meal.name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
+{% else %}
+<table class="table">
+    <tbody>
+        <tr>
+            <td>No meal plans yet!</td>
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

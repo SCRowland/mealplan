@@ -1,0 +1,26 @@
+{% extends 'meals/base.html' %}
+{% block title %}
+Meal Plan for {{ plan.start_date }}
+{% endblock %}
+
+{% block content %}
+<h2>Meal Plan for {{ plan.start_date|date:"d M Y" }}</h2>
+{% if meal_plan %}
+<table class="table">
+    <tbody>
+        {% for day, meal in meal_plan %}
+        <tr>
+            <td>{{ day }}</td>
+            <td>{{ meal.name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    {% else %}
+    <tbody>
+        <tr>
+            <td>No meal plan yet!</td>
+        </tr>
+    </tbody>
+    {% endif %}
+</table>
+{% endblock %}

@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 
-from .models import Meal
+from .models import Meal, MealPlan
 
 
 class IndexView(generic.ListView):
@@ -24,11 +24,21 @@ class DetailView(generic.UpdateView):
     template_name_suffix = "_update_form"
 
 
-class PlanView(generic.ListView):
-    model = Meal
+class MealPlanView(generic.DetailView):
+    model = MealPlan
     context_object_name = "plan"
-    template_name = "meals/plan_list.html"
+    template_name = "meals/plan_detail.html"
 
-    def get_queryset(self):
-        meals = Meal.objects.all()
-        return sample([m for m in meals], 7)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        obj = self.get_object()
+        context["meal_plan"] = zip(obj.days(), obj.meals.all())
+
+        return context
+
+
+class MealPlansView(generic.ListView):
+    model = MealPlan
+    context_object_name = "mealplans"
+    template_name = "meals/meal_plans_list.html"
